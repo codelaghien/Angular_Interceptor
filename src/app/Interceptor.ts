@@ -16,6 +16,8 @@ const headers = new HttpHeaders({
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
+  token: string;
+
   constructor(private authService: AuthService) {}
 
   intercept(
@@ -27,10 +29,10 @@ export class Interceptor implements HttpInterceptor {
     if (request.url.includes('/login')) {
       return next.handle(request);
     }
-    const aToken = this.authService.getToken();
-    console.log('Interceptor aToken', aToken);
-    if (aToken) {
-      let myHeaders = headers.set('Authorization', 'Bearer ' + aToken);
+    this.token = this.authService.getToken();
+    console.log('Interceptor aToken', this.token);
+    if (this.token) {
+      let myHeaders = headers.set('Authorization', 'Bearer ' + this.token);
       const AuthRequest = request.clone({ headers: myHeaders });
       console.log('Interceptor headers', myHeaders);
       return next.handle(AuthRequest);

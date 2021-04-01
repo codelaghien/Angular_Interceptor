@@ -23,7 +23,6 @@ const routes: Routes = [
       onSameUrlNavigation: 'reload',
     }),
   ],
-  // providers: [AuthService, AuthGuard],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
