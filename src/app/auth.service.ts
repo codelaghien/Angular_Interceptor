@@ -68,6 +68,8 @@ export class AuthService {
             console.log('AuthService: failed', error);
           }
         );
+      } else {
+        this.login(backUrl);
       }
     });
   }

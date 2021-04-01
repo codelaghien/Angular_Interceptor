@@ -32,8 +32,9 @@ export class DataService {
         // .pipe(delay(3000))
         .pipe(
           map((data) => {
+            console.log('DataService: getUsers', data);
             if (Object.prototype.hasOwnProperty.call(data, 'error')) {
-              console.log('DataService: getUsers', data);
+              console.log('DataService: getUsers: error', data);
               this.authService.removeToken();
               this.authService.login(backUrl);
             }
