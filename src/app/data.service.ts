@@ -25,7 +25,7 @@ export class DataService {
     private authService: AuthService
   ) {}
 
-  public getUsers(): Observable<any> {
+  public getUsers(backUrl): Observable<any> {
     return (
       this.httpClient
         .get(this.REST_API_SERVER + 'users')
@@ -35,9 +35,8 @@ export class DataService {
             if (Object.prototype.hasOwnProperty.call(data, 'error')) {
               console.log('authService => DataService: getUsers', data);
               localStorage.removeItem('token');
-              this.authService.login();
+              this.authService.login(backUrl);
             }
-            console.log('RETURN DataService: getUsers', data);
             return data;
           })
         )

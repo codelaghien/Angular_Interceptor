@@ -52,14 +52,21 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
-import { Interceptor } from './Interceptor';
+import { Interceptor } from './interceptor';
 import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { SecretComponent } from './secret/secret.component';
 
 @NgModule({
-  declarations: [AppComponent, DialogLoginComponent, HomeComponent, AboutComponent],
+  declarations: [
+    AppComponent,
+    DialogLoginComponent,
+    HomeComponent,
+    AboutComponent,
+    SecretComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

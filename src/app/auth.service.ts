@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DialogLoginComponent } from './dialog-login/dialog-login.component';
@@ -15,13 +16,17 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 export class AuthService {
   private REST_API_SERVER = 'http://localhost:5000/api/users/login';
 
-  constructor(private httpClient: HttpClient, public dialog: MatDialog) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
-  public login(): void {
-    this.openDialog();
+  public login(backUrl): void {
+    this.openDialog(backUrl);
   }
 
-  private openDialog(): void {
+  private openDialog(backUrl): void {
     const dialogRef = this.dialog.open(DialogLoginComponent, {
       width: '250px',
       data: { username: '', password: '' },
@@ -34,18 +39,9 @@ export class AuthService {
       if (!!username && !!password) {
         this.authLogin(username, password).subscribe(
           (token) => {
-            console.log('AuthService: login, token = ', token);
+            console.log('AuthService: login, token = ', token, backUrl);
             localStorage.setItem('token', token);
-            // return new Observable((observer) => {
-            //   observer.complete();
-            // });
-            console.log('AuthService: calling api users');
-            // return (
-            //   this.httpClient
-            //     .get('http://localhost:5000/api/users')
-            //     // .pipe(delay(3000))
-            //     .pipe(catchError(this.handleError))
-            // );
+            this.router.navigate([backUrl]);
           },
           (error) => {
             console.log('AuthService: failed', error);

@@ -1,12 +1,14 @@
-<!-- <div>
-  <ul>
-    <li *ngFor="let user of users">{{ user?.name }} @{{ user?.date }}</li>
-  </ul>
-</div> -->
 <nav>
   <ul>
     <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+    <li>
+      <a routerLink="/about" routerLinkActive="active">About (có lính gác !)</a>
+    </li>
+    <li>
+      <a routerLink="/secret" routerLinkActive="active">
+        Secret Room (Phòng bí mật)</a
+      >
+    </li>
   </ul>
 </nav>
 <router-outlet></router-outlet>
