@@ -58,6 +58,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SecretComponent } from './secret/secret.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SecretComponent } from './secret/secret.component';
     HomeComponent,
     AboutComponent,
     SecretComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

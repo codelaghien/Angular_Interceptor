@@ -5,10 +5,11 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './auth.guard';
 import { SecretComponent } from './secret/secret.component';
-import { AuthService } from './auth.service';
+import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

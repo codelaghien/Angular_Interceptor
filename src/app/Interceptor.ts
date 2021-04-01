@@ -27,14 +27,15 @@ export class Interceptor implements HttpInterceptor {
     if (request.url.includes('/login')) {
       return next.handle(request);
     }
-    const token = localStorage.getItem('token');
-    if (token) {
-      let myHeaders = headers.set('Authorization', 'Bearer ' + token);
+    const aToken = this.authService.getToken();
+    console.log('Interceptor aToken', aToken);
+    if (aToken) {
+      let myHeaders = headers.set('Authorization', 'Bearer ' + aToken);
       const AuthRequest = request.clone({ headers: myHeaders });
       console.log('Interceptor headers', myHeaders);
       return next.handle(AuthRequest);
     } else {
-      // this.authService.login();
+      this.authService.login('/');
     }
   }
 }

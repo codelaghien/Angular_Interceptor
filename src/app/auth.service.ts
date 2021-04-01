@@ -50,47 +50,57 @@ export class AuthService {
   private openDialog(backUrl): void {
     const dialogRef = this.dialog.open(DialogLoginComponent, {
       width: '250px',
-      data: { username: '', password: '' },
+      data: { username: '', password: '', token: '' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('AuthService: afterClosed', result);
       const username = result?.data?.username;
       const password = result?.data?.password;
-      if (!!username && !!password) {
-        this.authLogin(username, password).subscribe(
-          (token) => {
-            console.log('AuthService: login, token = ', token, backUrl);
-            this.setToken(token);
-            this.router.navigate([backUrl]);
-          },
-          (error) => {
-            console.log('AuthService: failed', error);
-          }
-        );
+      const token = result?.data?.token;
+      console.log(
+        'AuthService: afterClosed',
+        result,
+        username,
+        password,
+        token
+      );
+      if (!!username && !!password && !!token) {
+        this.setToken(token);
+        this.router.navigate([backUrl]);
+        // this.authLogin(username, password).subscribe(
+        //   (token) => {
+        //     console.log('AuthService: login, token = ', token, backUrl);
+        //     this.setToken(token);
+        //     this.router.navigate([backUrl]);
+        //   },
+        //   (error) => {
+        //     console.log('AuthService: failed', error);
+        //   }
+        // );
       } else {
         this.login(backUrl);
       }
     });
   }
 
-  public authLogin(username, password): Observable<any> {
-    console.log('AuthService: authLogin: ', username, password);
-    const httpParams = new HttpParams();
-    const payload = { username, password };
-    return (
-      this.httpClient
-        .post(this.REST_API_SERVER, payload, {
-          params: httpParams,
-        })
-        // .pipe(delay(3000))
-        // .pipe(map(data => {
-        //   console.log('DataService: login', data);
-        //   return data;
-        // }))
-        .pipe(catchError(this.handleError))
-    );
-  }
+  // public authLogin(username, password): Observable<any> {
+  //   console.log('AuthService: authLogin: ', username, password);
+  //   const httpParams = new HttpParams();
+  //   const payload = { username, password };
+  //   return (
+  //     this.httpClient
+  //       .post(this.REST_API_SERVER, payload, {
+  //         params: httpParams,
+  //       })
+  //       // .pipe(delay(3000))
+  //       // .pipe(map(data => {
+  //       //   console.log('DataService: login', data);
+  //       //   return data;
+  //       // }))
+  //       .pipe(catchError(this.handleError))
+  //   );
+  // }
 
   handleError(error: HttpErrorResponse): Observable<any> {
     let errorMessage = 'Unknown error!';

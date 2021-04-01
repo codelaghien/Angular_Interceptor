@@ -24,16 +24,13 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     // console.log('canActivate', route, state);
     if (state.url.includes('secret')) {
-      console.log('Bạn không thể vào phòng bí mật này !');
+      console.error('Bạn không thể vào phòng bí mật này !');
       return false;
     }
-    return true;
-
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   return true;
-    // } else {
-    //   this.authService.login(state.url);
-    // }
+    if (this.authService.isLoggedIn()) {
+      return true;
+    } else {
+      this.authService.login(state.url);
+    }
   }
 }
