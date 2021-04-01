@@ -22,6 +22,27 @@ export class AuthService {
     public dialog: MatDialog
   ) {}
 
+  public setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  public removeToken() {
+    localStorage.removeItem('token');
+  }
+
+  public getToken() {
+    return localStorage.getItem('token');
+  }
+
+  public isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
+  public logout() {
+    this.removeToken();
+    this.router.navigate(['/']);
+  }
+
   public login(backUrl): void {
     this.openDialog(backUrl);
   }
@@ -40,7 +61,7 @@ export class AuthService {
         this.authLogin(username, password).subscribe(
           (token) => {
             console.log('AuthService: login, token = ', token, backUrl);
-            localStorage.setItem('token', token);
+            this.setToken(token);
             this.router.navigate([backUrl]);
           },
           (error) => {

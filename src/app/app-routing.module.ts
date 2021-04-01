@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './auth.guard';
 import { SecretComponent } from './secret/secret.component';
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       onSameUrlNavigation: 'reload',
     }),
   ],
+  providers: [AuthService, AuthGuard],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

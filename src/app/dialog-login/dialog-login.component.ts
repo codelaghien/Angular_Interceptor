@@ -5,6 +5,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
+// import { DataService } from '../data.service';
 
 export interface DialogData {
   username: string;
@@ -19,6 +20,7 @@ export interface DialogData {
 export class DialogLoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
+    // private dataService: DataService,
     public dialogRef: MatDialogRef<DialogLoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
