@@ -15,12 +15,9 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
-    this.dataService.getUsers('/about').subscribe((data) => {
-      console.log('AboutComponent: getUsers', data);
-      localStorage.setItem('token', data.token);
-      if (Array.isArray(data.data)) {
-        this.users = data.data;
-      }
+    this.dataService.getUsersFromWeb('/about').subscribe((result) => {
+      console.log('AboutComponent: getUsers', result);
+      this.users = result.results;
     });
   }
 }

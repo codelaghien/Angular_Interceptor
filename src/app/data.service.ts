@@ -19,6 +19,7 @@ const headers = new HttpHeaders({
 })
 export class DataService {
   private REST_API_SERVER = 'http://localhost:5000/api/';
+  private REST_API_SERVER2 = 'https://randomuser.me/api/?results=5';
 
   constructor(
     private httpClient: HttpClient,
@@ -33,8 +34,26 @@ export class DataService {
         .pipe(
           map((data) => {
             if (Object.prototype.hasOwnProperty.call(data, 'error')) {
-              console.log('authService => DataService: getUsers', data);
+              console.log('DataService: getUsers', data);
               localStorage.removeItem('token');
+              this.authService.login(backUrl);
+            }
+            return data;
+          })
+        )
+        .pipe(catchError(this.handleError))
+    );
+  }
+
+  public getUsersFromWeb(backUrl): Observable<any> {
+    return (
+      this.httpClient
+        .get(this.REST_API_SERVER2)
+        // .pipe(delay(3000))
+        .pipe(
+          map((data) => {
+            if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+              console.log('DataService: getUsersFromWeb', data);
               this.authService.login(backUrl);
             }
             return data;

@@ -22,7 +22,7 @@ export class Interceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('Interceptor request', request);
+    // console.log('Interceptor request', request);
     return next.handle(request);
   }
 }
