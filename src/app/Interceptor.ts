@@ -24,18 +24,5 @@ export class Interceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     console.log('Interceptor request', request);
     return next.handle(request);
-
-    // if (request.url.includes('/login')) {
-    //   return next.handle(request);
-    // }
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   let myHeaders = headers.set('Authorization', 'Bearer ' + token);
-    //   const AuthRequest = request.clone({ headers: myHeaders });
-    //   console.log('Interceptor headers', myHeaders);
-    //   return next.handle(AuthRequest);
-    // } else {
-    //   // this.authService.login();
-    // }
   }
 }
