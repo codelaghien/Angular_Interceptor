@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // console.log('canActivate', route, state);
+    console.log('canActivate', route, state);
     if (state.url.includes('secret')) {
       console.error('Bạn không thể vào phòng bí mật này !');
       return false;
