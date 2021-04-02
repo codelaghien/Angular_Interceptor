@@ -22,7 +22,7 @@ export class AboutComponent implements OnInit {
 
     this.dataService.getUsers('/about').subscribe((data) => {
       console.log('AboutComponent: getUsers', data);
-      this.authService.setToken(data?.token?.token);
+      this.authService.setToken(data?.token);
       if (Array.isArray(data.data)) {
         this.users = data.data;
       }

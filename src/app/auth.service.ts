@@ -14,13 +14,7 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
   providedIn: 'root',
 })
 export class AuthService {
-  private REST_API_SERVER = 'http://localhost:5000/api/users/login';
-
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-    public dialog: MatDialog
-  ) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   public setToken(token: string) {
     localStorage.setItem('token', token);
@@ -68,51 +62,9 @@ export class AuthService {
       if (!!username && !!password && !!token) {
         this.setToken(token);
         this.router.navigate([backUrl]);
-        // this.authLogin(username, password).subscribe(
-        //   (token) => {
-        //     console.log('AuthService: login, token = ', token, backUrl);
-        //     this.setToken(token);
-        //     this.router.navigate([backUrl]);
-        //   },
-        //   (error) => {
-        //     console.log('AuthService: failed', error);
-        //   }
-        // );
       } else {
         this.login(backUrl);
       }
     });
-  }
-
-  // public authLogin(username, password): Observable<any> {
-  //   console.log('AuthService: authLogin: ', username, password);
-  //   const httpParams = new HttpParams();
-  //   const payload = { username, password };
-  //   return (
-  //     this.httpClient
-  //       .post(this.REST_API_SERVER, payload, {
-  //         params: httpParams,
-  //       })
-  //       // .pipe(delay(3000))
-  //       // .pipe(map(data => {
-  //       //   console.log('DataService: login', data);
-  //       //   return data;
-  //       // }))
-  //       .pipe(catchError(this.handleError))
-  //   );
-  // }
-
-  handleError(error: HttpErrorResponse): Observable<any> {
-    let errorMessage = 'Unknown error!';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side errors
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side errors
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    // window.alert(errorMessage);
-    console.log('Error', errorMessage);
-    return throwError(errorMessage);
   }
 }

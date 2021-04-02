@@ -22,7 +22,7 @@ export class ProjectsComponent implements OnInit {
 
     this.dataService.getUsers('/projects').subscribe((data) => {
       console.log('ProjectsComponent: getUsers', data);
-      this.authService.setToken(data?.token?.token);
+      this.authService.setToken(data?.token);
       if (Array.isArray(data.data)) {
         this.users = data.data;
       }
