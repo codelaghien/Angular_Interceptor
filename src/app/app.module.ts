@@ -51,6 +51,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 
+import { FileUploadModule } from 'ng2-file-upload';
+
 import { AppComponent } from './app.component';
 import { Interceptor } from './interceptor';
 import { DialogLoginComponent } from './dialog-login/dialog-login.component';
@@ -121,6 +123,7 @@ import { ProjectsComponent } from './projects/projects.component';
     PortalModule,
     ScrollingModule,
     AppRoutingModule,
+    FileUploadModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },

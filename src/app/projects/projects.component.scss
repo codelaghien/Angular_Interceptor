@@ -1,0 +1,25 @@
+.my-drop-zone {
+  border: dotted 3px lightgray;
+  height: 100px;
+  width: 400px;
+  text-align: center;
+  font-size: larger;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.nv-file-over {
+  border: dotted 3px green;
+}
+
+table,
+th,
+tr,
+td {
+  border: 1px solid black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

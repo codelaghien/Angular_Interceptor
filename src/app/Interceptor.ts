@@ -22,7 +22,7 @@ export class Interceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('Interceptor request', request);
+    // console.log('Interceptor request', request);
 
     if (request.url.includes('/login')) {
       return next.handle(request);
@@ -31,7 +31,7 @@ export class Interceptor implements HttpInterceptor {
     if (token) {
       let myHeaders = headers.set('Authorization', 'Bearer ' + token);
       const AuthRequest = request.clone({ headers: myHeaders });
-      console.log('Interceptor headers', myHeaders);
+      // console.log('Interceptor headers', myHeaders);
       return next.handle(AuthRequest);
     } else {
       this.authService.login('/');
